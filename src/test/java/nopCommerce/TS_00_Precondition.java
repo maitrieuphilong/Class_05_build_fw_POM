@@ -21,7 +21,7 @@ public class TS_00_Precondition {
 		
 		// khởi tạo trang Register
 		registerPage = new RegisterPageObject(driver);
-		registerPage.openUrl(driver, "https://demo.nopcommerce.com/register?returnUrl=%2Fwishlist");
+		registerPage.openUrl(driver, "http://localhost:8010/register?returnUrl=%2Fwishlist");
 	}
 	
 	@AfterClass

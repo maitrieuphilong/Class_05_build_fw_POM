@@ -59,7 +59,6 @@ public class RegisterPageObject extends BasePage {
 	}
 	
 	public boolean isEmailErrorMessage(String value) {
-//		moveToElement(driver, RegisterPageUI.EMAIL_ERROR_MESSAGE);
 		String message = getTextOfElement(driver, RegisterPageUI.EMAIL_ERROR_MESSAGE);
 		return message.contains(value);
 	}
@@ -69,20 +68,24 @@ public class RegisterPageObject extends BasePage {
 		return message.contains(value);
 	}
 	
-	public void enterToDateDropdown(String value) {
-		selectDropdownByText(driver, RegisterPageUI.DATE_DROPDOWN, value);
-	}
-	
-	public void enterToMonthDropdown(String value) {
-		selectDropdownByText(driver, RegisterPageUI.MONTH_DROPDOWN, value);
-	}
-	
-	public void enterToYearDropdown(String value) {
-		selectDropdownByText(driver, RegisterPageUI.YEAR_DROPDOWN, value);
-	}
-	
 	public void clickLogoutLink() {
 		waitForElementClickable(driver, RegisterPageUI.LOGOUT_LINK);
 		clickToElement(driver, RegisterPageUI.LOGOUT_LINK);
 	}
+	
+	public void clickRegisterLink() {
+		waitForElementClickable(driver, RegisterPageUI.REGISTER_LINK);
+		clickToElement(driver, RegisterPageUI.REGISTER_LINK);
+	}
+	
+	public boolean isEmailExistMessage(String value) {
+		String message = getTextOfElement(driver, RegisterPageUI.EMAIL_EXIST_MESSAGE);
+		return message.contains(value);
+	}
+	
+	public boolean isPasswordLeast6Characters(String value) {
+		String message = getTextOfElement(driver, RegisterPageUI.PASSWORD_LEAST_6_CHARACTERS_MESSAGE);
+		return message.contains(value);
+	}
+	
 }

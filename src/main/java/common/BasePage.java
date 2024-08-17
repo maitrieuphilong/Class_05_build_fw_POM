@@ -18,7 +18,6 @@ public class BasePage {
 		return new BasePage();
 	}
 	
-	
 	public void openUrl(WebDriver driver, String pageUrl) {
 		driver.get(pageUrl);
 	}
