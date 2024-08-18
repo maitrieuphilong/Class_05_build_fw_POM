@@ -84,6 +84,7 @@ public class RegisterPageObject extends BasePage {
 	}
 	
 	public boolean isPasswordLeast6Characters(String value) {
+		moveToElement(driver, RegisterPageUI.PASSWORD_LEAST_6_CHARACTERS_MESSAGE);
 		String message = getTextOfElement(driver, RegisterPageUI.PASSWORD_LEAST_6_CHARACTERS_MESSAGE);
 		return message.contains(value);
 	}

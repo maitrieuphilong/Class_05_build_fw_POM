@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,6 +14,7 @@ public class BasePage {
 	private WebDriverWait explicitWait;
 	private long timeoutExplicit = GlobalConstants.explicit_timeout;
 	private Select select;
+	private Actions action;
 	
 	public static BasePage getBasePage() {
 		return new BasePage();
@@ -73,5 +75,10 @@ public class BasePage {
 	public void selectDropdownByText(WebDriver driver, String locator, String textItem) {
 		select = new Select(getElement(driver, locator));
 		select.selectByVisibleText(textItem);
+	}
+	
+	public void moveToElement(WebDriver driver, String locator) {
+		action = new Actions(driver);
+		action.moveToElement(getElement(driver, locator)).perform();
 	}
 }

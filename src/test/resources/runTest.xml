@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite parallel="false" name="Suite">
-	<test name="Test run">
+	<listeners>
+		<listener class-name="reportConfigV5.ExtentTestListener"></listener>
+	</listeners>
+	
+	<test name="Test run with Chrome">
+		<parameter name="browser" value="chrome"/>
 		<classes>
 			<class name="nopCommerce.TS_01_Register" />
-			<class name="nopCommerce.TS_02_Login" />
 		</classes>
 	</test> <!-- Test -->
 

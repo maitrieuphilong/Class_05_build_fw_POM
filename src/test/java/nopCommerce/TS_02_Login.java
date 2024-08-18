@@ -5,20 +5,25 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import common.BaseTest;
 import common.GlobalConstants;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
 
-public class TS_02_Login {
+public class TS_02_Login extends BaseTest {
 	WebDriver driver;
 	LoginPageObject loginPage;
 	HomePageObject homePage;
 	
+	@Parameters({"browser"})
 	@BeforeClass
-	public void beforeClass() {
-		driver = new FirefoxDriver();
+	public void beforeClass(@Optional("chrome") String browserName) {
+		// start browser lên
+		driver = getBrowserDriver(browserName);
 		loginPage = new LoginPageObject(driver);
 		loginPage.openUrl(driver, "http://localhost:8010/login");
 	}
