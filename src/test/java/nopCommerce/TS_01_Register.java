@@ -57,10 +57,9 @@ public class TS_01_Register extends BaseTest {
 	
 	@Test
 	public void TC_01_RegisterWithEmptyData() {
-		ExtentTestManager.startTest("Register test case 01", "Register with empty data");
-		ExtentTestManager.getTest().log(Status.INFO, "Step 1: click register button");
+		extentLog("Step 1: click register button");
 		registerPage.clickToRegisterButton();
-		ExtentTestManager.getTest().log(Status.INFO, "Step 2: verify error message show up");
+		extentLog("Step 2: verify error message show up");
 		Assert.assertTrue(registerPage.isFirstnameErrorMessage("First name is required."));
 		Assert.assertTrue(registerPage.isLastnameErrorMessage("Last name is required."));
 		Assert.assertTrue(registerPage.isEmailErrorMessage("Email is required."));
@@ -69,14 +68,13 @@ public class TS_01_Register extends BaseTest {
 
 	@Test
 	public void TC_02_RegisterWithInvalidEmail() {
-		ExtentTestManager.startTest("Register test case 02", "Register with invalid email");
-		ExtentTestManager.getTest().log(Status.INFO, "Step 1: renew page");
+		extentLog("Step 1: renew page");
 		registerPage.clickRegisterLink();
-		ExtentTestManager.getTest().log(Status.INFO, "Step 2: enter invalid email");
+		extentLog("Step 2: enter invalid email");
 		registerPage.enterToEmailTextbox("abcxyz");
-		ExtentTestManager.getTest().log(Status.INFO, "Step 3: click register button");
+		extentLog("Step 3: click register button");
 		registerPage.clickToRegisterButton();
-		ExtentTestManager.getTest().log(Status.INFO, "Step 4: verify error invalid email");
+		extentLog("Step 4: verify error invalid email");
 		Assert.assertTrue(registerPage.isEmailErrorMessage("Please enter a valid email address."));
 	}
 
@@ -110,21 +108,20 @@ public class TS_01_Register extends BaseTest {
 
 	@Test
 	public void TC_05_RegisterWithPasswordLeast6Characters() {
-		ExtentTestManager.startTest("Register test case 05", "Register with short password");
-		ExtentTestManager.getTest().log(Status.INFO, "Step 1: renew page");
+		extentLog("Step 1: renew page");
 		registerPage.clickRegisterLink();
-		ExtentTestManager.getTest().log(Status.INFO, "Step 2: enter firstName: " + firstName);
+		extentLog("Step 2: enter firstName: " + firstName);
 		registerPage.enterToFirstNameTextbox(firstName);
-		ExtentTestManager.getTest().log(Status.INFO, "Step 3: enter lastName: " + lastName);
+		extentLog("Step 3: enter lastName: " + lastName);
 		registerPage.enterToLastNameTextbox(lastName);
-		ExtentTestManager.getTest().log(Status.INFO, "Step 4: enter email: " + emailRandom);
+		extentLog("Step 4: enter email: " + emailRandom);
 		registerPage.enterToEmailTextbox(emailRandom);
-		ExtentTestManager.getTest().log(Status.INFO, "Step 5: enter short password");
+		extentLog("Step 5: enter short password");
 		registerPage.enterToPasswordTextbox("12345");
 		registerPage.enterToConfirmPasswordTextbox("12345");
-		ExtentTestManager.getTest().log(Status.INFO, "Step 6: click register button");
+		extentLog("Step 6: click register button");
 		registerPage.clickToRegisterButton();
-		ExtentTestManager.getTest().log(Status.INFO, "Step 7: verify password must have at least 6 characters");
+		extentLog("Step 7: verify password must have at least 6 characters");
 		Assert.assertTrue(registerPage.isPasswordLeast6Characters("Password must meet the following rules:"));
 		Assert.assertTrue(registerPage.isPasswordLeast6Characters("must have at least 6"));
 	}

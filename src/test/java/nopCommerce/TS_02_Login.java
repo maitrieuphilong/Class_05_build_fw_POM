@@ -1,5 +1,7 @@
 package nopCommerce;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
@@ -13,13 +15,14 @@ import common.BaseTest;
 import common.GlobalConstants;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
+import utils.ExcelUtil;
 
 public class TS_02_Login extends BaseTest {
 	WebDriver driver;
 	LoginPageObject loginPage;
 	HomePageObject homePage;
-	
-	@Parameters({"browser"})
+
+	@Parameters({ "browser" })
 	@BeforeClass
 	public void beforeClass(@Optional("chrome") String browserName) {
 		// start browser lên
@@ -27,12 +30,12 @@ public class TS_02_Login extends BaseTest {
 		loginPage = new LoginPageObject(driver);
 		loginPage.openUrl(driver, "http://localhost:8010/login");
 	}
-	
+
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
 	}
-	
+
 	@Test
 	public void TC_01_LoginWithEmptyData() {
 		loginPage.clickToLoginButton();
@@ -93,5 +96,26 @@ public class TS_02_Login extends BaseTest {
 		homePage = new HomePageObject(driver);
 		Assert.assertTrue(homePage.isMyAccountPresent("My account"));
 	}
-	
+
+	@Test
+	public void TC_07_LoginWithDataDriven() throws IOException {
+		ExcelUtil.setExcelFile("Auto");
+
+		// Không dùng vòng lặp, chỉ duyệt record đầu tiên trong Sheet
+		String excelUserName = ExcelUtil.getCellData(1, 1);
+		String excelPassword = ExcelUtil.getCellData(1, 2);
+		
+		loginPage.clickLoginLink();
+		loginPage.enterToEmailTextbox(excelUserName);
+		loginPage.enterToPasswordTextbox(excelPassword);
+		loginPage.clickToLoginButton();
+		homePage = new HomePageObject(driver);
+		String homePageUrl = homePage.getPageUrl(driver);
+		if(homePageUrl.equals("http://localhost:8010/")) {
+			ExcelUtil.setCellData("Pass", 1, 3);
+		} else {
+			ExcelUtil.setCellData("Fail", 1, 3);
+		}
+	}
+
 }
